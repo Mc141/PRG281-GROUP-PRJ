@@ -1,0 +1,20 @@
+C:\Users\MC\Desktop\Code\C#\PRG281 PRJ\PRG282 PRJ\bin\Debug\PRG282 PRJ.exe.config
+C:\Users\MC\Desktop\Code\C#\PRG281 PRJ\PRG282 PRJ\bin\Debug\PRG282 PRJ.exe
+C:\Users\MC\Desktop\Code\C#\PRG281 PRJ\PRG282 PRJ\bin\Debug\PRG282 PRJ.pdb
+C:\Users\MC\Desktop\Code\C#\PRG281 PRJ\PRG282 PRJ\obj\Debug\PRG282 PRJ.csproj.AssemblyReference.cache
+C:\Users\MC\Desktop\Code\C#\PRG281 PRJ\PRG282 PRJ\obj\Debug\PRG282_PRJ.Properties.Resources.resources
+C:\Users\MC\Desktop\Code\C#\PRG281 PRJ\PRG282 PRJ\obj\Debug\PRG282 PRJ.csproj.GenerateResource.cache
+C:\Users\MC\Desktop\Code\C#\PRG281 PRJ\PRG282 PRJ\obj\Debug\PRG282 PRJ.csproj.CoreCompileInputs.cache
+C:\Users\MC\Desktop\Code\C#\PRG281 PRJ\PRG282 PRJ\obj\Debug\PRG282 PRJ.exe
+C:\Users\MC\Desktop\Code\C#\PRG281 PRJ\PRG282 PRJ\obj\Debug\PRG282 PRJ.pdb
+C:\Users\MC\Desktop\Code\C#\PRG281 PRJ\PRG282 PRJ\obj\Debug\PRG282_PRJ.Form1.resources
+C:\Users\MC\Downloads\PRG-282-PRJ-main\bin\Debug\PRG282 PRJ.exe.config
+C:\Users\MC\Downloads\PRG-282-PRJ-main\bin\Debug\PRG282 PRJ.exe
+C:\Users\MC\Downloads\PRG-282-PRJ-main\bin\Debug\PRG282 PRJ.pdb
+C:\Users\MC\Downloads\PRG-282-PRJ-main\obj\Debug\PRG282 PRJ.csproj.AssemblyReference.cache
+C:\Users\MC\Downloads\PRG-282-PRJ-main\obj\Debug\PRG282_PRJ.Form1.resources
+C:\Users\MC\Downloads\PRG-282-PRJ-main\obj\Debug\PRG282_PRJ.Properties.Resources.resources
+C:\Users\MC\Downloads\PRG-282-PRJ-main\obj\Debug\PRG282 PRJ.csproj.GenerateResource.cache
+C:\Users\MC\Downloads\PRG-282-PRJ-main\obj\Debug\PRG282 PRJ.csproj.CoreCompileInputs.cache
+C:\Users\MC\Downloads\PRG-282-PRJ-main\obj\Debug\PRG282 PRJ.exe
+C:\Users\MC\Downloads\PRG-282-PRJ-main\obj\Debug\PRG282 PRJ.pdb

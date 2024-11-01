@@ -1,0 +1,5 @@
+1,John,Doe,20,Computer Science
+2,Jane,Smith,22,Mathematics
+3,Bob,Johnson,21,Physics
+4,Alice,Williams,19,Chemistry
+5,Tom,Brown,23,Biology
