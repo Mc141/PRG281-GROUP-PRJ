@@ -18,3 +18,14 @@ C:\Users\MC\Downloads\PRG-282-PRJ-main\obj\Debug\PRG282 PRJ.csproj.GenerateResou
 C:\Users\MC\Downloads\PRG-282-PRJ-main\obj\Debug\PRG282 PRJ.csproj.CoreCompileInputs.cache
 C:\Users\MC\Downloads\PRG-282-PRJ-main\obj\Debug\PRG282 PRJ.exe
 C:\Users\MC\Downloads\PRG-282-PRJ-main\obj\Debug\PRG282 PRJ.pdb
+C:\Users\Latitude 5580\Desktop\Belgium\Second Year\PRG282\Project\PRG281-GROUP-PRJ\bin\Debug\PRG282 PRJ.exe.config
+C:\Users\Latitude 5580\Desktop\Belgium\Second Year\PRG282\Project\PRG281-GROUP-PRJ\bin\Debug\PRG282 PRJ.exe
+C:\Users\Latitude 5580\Desktop\Belgium\Second Year\PRG282\Project\PRG281-GROUP-PRJ\bin\Debug\PRG282 PRJ.pdb
+C:\Users\Latitude 5580\Desktop\Belgium\Second Year\PRG282\Project\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.csproj.AssemblyReference.cache
+C:\Users\Latitude 5580\Desktop\Belgium\Second Year\PRG282\Project\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.csproj.SuggestedBindingRedirects.cache
+C:\Users\Latitude 5580\Desktop\Belgium\Second Year\PRG282\Project\PRG281-GROUP-PRJ\obj\Debug\PRG282_PRJ.Form1.resources
+C:\Users\Latitude 5580\Desktop\Belgium\Second Year\PRG282\Project\PRG281-GROUP-PRJ\obj\Debug\PRG282_PRJ.Properties.Resources.resources
+C:\Users\Latitude 5580\Desktop\Belgium\Second Year\PRG282\Project\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.csproj.GenerateResource.cache
+C:\Users\Latitude 5580\Desktop\Belgium\Second Year\PRG282\Project\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.csproj.CoreCompileInputs.cache
+C:\Users\Latitude 5580\Desktop\Belgium\Second Year\PRG282\Project\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.exe
+C:\Users\Latitude 5580\Desktop\Belgium\Second Year\PRG282\Project\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.pdb
