@@ -67,6 +67,7 @@
             this.btnAddStudent.TabIndex = 5;
             this.btnAddStudent.Text = "Add Student";
             this.btnAddStudent.UseVisualStyleBackColor = true;
+            this.btnAddStudent.Click += new System.EventHandler(this.btnAddStudent_Click);
             // 
             // btnGenerateSummary
             // 
@@ -212,6 +213,12 @@
             // cmbCourses
             // 
             this.cmbCourses.FormattingEnabled = true;
+            this.cmbCourses.Items.AddRange(new object[] {
+            "Programming",
+            "Mathematics",
+            "Statistics",
+            "Architecture",
+            "Engineering"});
             this.cmbCourses.Location = new System.Drawing.Point(159, 201);
             this.cmbCourses.Name = "cmbCourses";
             this.cmbCourses.Size = new System.Drawing.Size(121, 23);

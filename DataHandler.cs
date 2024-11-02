@@ -24,5 +24,29 @@ namespace PRG282_PRJ
         {
             return students; // Return the list of students.
         }
+
+        public void AddStudent(Student newStudent)
+        {
+            // Check if a student with the same ID already exists in the list/file.
+            if (students.Exists(s => s.StudentId == newStudent.StudentId))
+            {
+                // Display an error message to the user if a duplicate student ID is found.
+                MessageBox.Show("A student with this ID already exists.", "Duplicate ID", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            students.Add(newStudent); // Add the new student to the list.
+
+            if (fileHandler.FileExists() == true)
+            {
+                List<Student> newStudents = new List<Student>(); // Initialize a new list for the new student to append.
+                newStudents.Add(newStudent); // Add the newStudent to the newStudents list.
+                fileHandler.Append(newStudents); //Append the student to the file.
+            }
+            else
+            {
+                fileHandler.Write(students); //If the file doesn't exist, write all students to the file.
+            }
+        }
     }
 }
