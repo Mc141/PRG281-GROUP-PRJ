@@ -49,6 +49,22 @@ namespace PRG282_PRJ
             }
         }
 
+        public void DeleteStudent(int studentId)
+        {
+            // Remove the student with the matching ID from the list.
+            Student studentToDelete = students.Find(s => s.StudentId == studentId);
+            if (studentToDelete != null)
+            {
+                students.Remove(studentToDelete); // Remove the student from the list.
+                fileHandler.Write(students); // Write the updated list to the file.
+                MessageBox.Show("Student deleted successfully.", "Delete Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Student not found.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public Student SearchId(int Id, List<Student> students)
         {
             foreach (Student student in students)

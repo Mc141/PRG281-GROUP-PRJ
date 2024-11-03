@@ -3,4 +3,3 @@
 3,Bob,Johnson,21,Bachelor Of Computing
 4,Alice,Williams,19,Certificate: IT
 5,Tom,Brown,23,National Certificate: IT
-6,Peter,Thomas,22,Bachelor of IT

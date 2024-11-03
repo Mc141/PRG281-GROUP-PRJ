@@ -13,9 +13,11 @@ namespace PRG282_PRJ
 {
     public partial class Form1 : Form
     {
+        private DataHandler dataHandler;
         public Form1()
         {
             InitializeComponent();
+            dataHandler = new DataHandler();
         }
 
         BindingSource bindingSource = new BindingSource();
@@ -34,6 +36,12 @@ namespace PRG282_PRJ
 
             bindingSource.DataSource = dataList;
             dgvStudents.DataSource = bindingSource;
+        }
+
+        private void LoadStudents()
+        {
+            dgvStudents.DataSource = null;
+            dgvStudents.DataSource = dataHandler.GetStudents(); // Reload the students list into the DataGridView.
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -172,6 +180,34 @@ namespace PRG282_PRJ
             {
                 // Prevents the selection of the head row. Selecting it, throws an exception that will be caught here, and ignored as it doesn't affect the program execution.
             }
+        }
+
+        private void ClearInputFields()
+        {
+            txtStudentID.Clear();
+            txtFirstName.Clear();
+            txtLastName.Clear();
+            txtAge.Clear();
+            cmbCourses.SelectedIndex = -1; // Reset combo box selection.
+        }
+
+        private void btn_Click(object sender, EventArgs e)
+        {
+            int studentId;
+
+            // Ensure that the ID field contains a valid integer.
+            if (!int.TryParse(txtStudentID.Text, out studentId))
+            {
+                MessageBox.Show("Please enter a valid ID value.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Delete the student record.
+            dataHandler.DeleteStudent(studentId);
+            LoadStudents(); // Refresh the DataGridView to show updated data.
+
+            // Clear input fields after deleting.
+            ClearInputFields();
         }
     }
 }
