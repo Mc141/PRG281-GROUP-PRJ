@@ -48,5 +48,17 @@ namespace PRG282_PRJ
                 fileHandler.Write(students); //If the file doesn't exist, write all students to the file.
             }
         }
+
+        public Student SearchId(int Id, List<Student> students)
+        {
+            foreach (Student student in students)
+            {
+                if (Id == student.StudentId)
+                {
+                    return student;
+                }
+            }
+            return null;
+        }
     }
 }

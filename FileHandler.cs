@@ -10,18 +10,19 @@ namespace PRG282_PRJ
 {
     internal class FileHandler
     {
-        private string filePath = "students.txt"; // Path of the file where student records will be stored.
+        private readonly string filePath = @"students.txt"; // Path of the file where student records will be stored.
+        private readonly string coursesFilePath = @"courses.txt";
 
-        //Checks if the specified file exists at the given file path.
+
         public bool FileExists()
         {
             if (File.Exists(filePath))
             {
-                return true; // Return true if the file is found.
+                return true;
             }
             else
             {
-                return false; // Return false if the file is not found.
+                return false;
             }
         }
 
@@ -60,10 +61,8 @@ namespace PRG282_PRJ
             if (!File.Exists(filePath))
             {
                 // If the file does not exist, create it.
-                using (File.Create(filePath))
-                {
-                    // This will create an empty file.
-                }
+                File.Create(filePath);
+
                 return students; // Return an empty list if the file is not found.
             }
             // Attempts to read student records from the specified file and save them in the students list.
@@ -73,10 +72,12 @@ namespace PRG282_PRJ
                 using (StreamReader reader = new StreamReader(filePath))
                 {
                     string record; // Variable to hold each line read from the file.
+                    int lineNumber = 0; // Track the line number for debugging purposes.
 
                     // Loop through the file until all lines are read.
                     while ((record = reader.ReadLine()) != null)
                     {
+                        lineNumber++; // Increment line number for each record.
                         // Split each line into fields based on commas.
                         string[] fields = record.Split(',');
 
@@ -92,7 +93,7 @@ namespace PRG282_PRJ
                         else
                         {
                             // Notify user if the record format is invalid.
-                            MessageBox.Show($"Invalid record format: {record}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                            MessageBox.Show($"Invalid record format at line {lineNumber}: {record}", "Warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                 }
@@ -131,6 +132,12 @@ namespace PRG282_PRJ
             {
                 HandleException(ex); // Call the helper method to handle the exception.
             }
+        }
+
+        public List<string> ReadCourses()
+        {
+            List<string> courses = File.ReadAllLines(coursesFilePath).ToList();
+            return courses;
         }
 
         // Private helper method to handle exceptions and display appropriate messages.

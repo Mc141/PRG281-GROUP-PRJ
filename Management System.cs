@@ -18,7 +18,7 @@ namespace PRG282_PRJ
             InitializeComponent();
         }
 
-
+        BindingSource bindingSource = new BindingSource();
 
         private void RenameHeaders()
         {
@@ -27,19 +27,25 @@ namespace PRG282_PRJ
             dgvStudents.Columns[2].HeaderText = "Last Name";
         }
 
-        private void LoadData()
+        private void LoadData(List<Student> dataList)
         {
-            BindingSource bindingSource = new BindingSource();
+            
             DataHandler handler = new DataHandler();
 
-            bindingSource.DataSource = handler.GetStudents();
+            bindingSource.DataSource = dataList;
             dgvStudents.DataSource = bindingSource;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            LoadData();
+            // Populate DGV and renames headers.
+            LoadData(Program.dataHandler.GetStudents());
             RenameHeaders();
+
+            // Populate course comboBox
+            cmbCourses.Items.AddRange(Program.fileHandler.ReadCourses().ToArray());
+
+            dgvStudents.Columns[4].Width = 155;
         }
 
         private void btnAddStudent_Click(object sender, EventArgs e)
@@ -91,14 +97,81 @@ namespace PRG282_PRJ
             handler.AddStudent(newStudent);
 
             // Refresh the data in the DataGridView to show the new student
-            LoadData();
+            Program.dataHandler.GetStudents();
 
             // Clear input fields after adding
             txtStudentID.Clear();
             txtFirstName.Clear();
             txtLastName.Clear();
             txtAge.Clear();
-            cmbCourses.ResetText();
+
+            // Refresh the dataGridView
+            bindingSource.DataSource = Program.fileHandler.Read();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            // Declare a variable to store the search ID.
+            int searchId;
+
+            // Try to parse the input text from txtIdSearch as an integer.
+            if (int.TryParse(txtIdSearch.Text, out searchId))
+            {
+                // Search for the student with the given ID in the list of students.
+                Student searchedStudent = Program.dataHandler.SearchId(searchId, Program.dataHandler.GetStudents());
+
+                // Check if the student was found.
+                if (searchedStudent != null)
+                {
+                    // If found, create a list with the searched student (to display the result) and load the data.
+                    List<Student> results = new List<Student> { searchedStudent };
+                    LoadData(results); // Load the search results into the DataGridView.
+                }
+                else
+                {
+                    // If the student is not found, display a message to inform the user.
+                    MessageBox.Show($"There is no student with the ID: {searchId}", "Student Not Found!");
+                }
+            }
+            else
+            {
+                // If the input is not a valid integer, display an error message.
+                MessageBox.Show("The entered ID is not valid.", "Invalid ID!");
+            }
+        }
+
+
+        private void lblSearchId_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClearSearch_Click(object sender, EventArgs e)
+        {
+            // Reset the Search result and text box.
+            LoadData(Program.dataHandler.GetStudents());
+            txtIdSearch.Text = "";
+        }
+
+        private void dgvStudents_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int indexRow = e.RowIndex; //Catch seleted row index
+
+            try
+            {
+                // Write the selected row's values to the corresponding text boxes.
+                DataGridViewRow row = dgvStudents.Rows[indexRow];
+
+                txtStudentID.Text = row.Cells[0].Value.ToString();
+                txtFirstName.Text = row.Cells[1].Value.ToString();
+                txtLastName.Text = row.Cells[2].Value.ToString();
+                txtAge.Text = row.Cells[3].Value.ToString();
+                cmbCourses.Text = row.Cells[4].Value.ToString();
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                // Prevents the selection of the head row. Selecting it, throws an exception that will be caught here, and ignored as it doesn't affect the program execution.
+            }
         }
     }
 }
