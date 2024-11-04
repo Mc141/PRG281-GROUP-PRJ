@@ -106,6 +106,7 @@
             this.btnUpdateStudent.TabIndex = 8;
             this.btnUpdateStudent.Text = "Update Student";
             this.btnUpdateStudent.UseVisualStyleBackColor = true;
+            this.btnUpdateStudent.Click += new System.EventHandler(this.btnUpdateStudent_Click);
             // 
             // lblStudentId
             // 
@@ -207,7 +208,6 @@
             this.lblSearchId.Size = new System.Drawing.Size(61, 15);
             this.lblSearchId.TabIndex = 18;
             this.lblSearchId.Text = "Search ID";
-            this.lblSearchId.Click += new System.EventHandler(this.lblSearchId_Click);
             // 
             // btnSearch
             // 

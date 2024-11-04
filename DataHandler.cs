@@ -65,15 +65,35 @@ namespace PRG282_PRJ
             }
         }
 
+        public void UpdateStudent(Student updatedStudent)
+        {
+            // Find the index of the student with the matching ID.
+            int index = students.FindIndex(s => s.StudentId == updatedStudent.StudentId);
+            if (index >= 0)
+            {
+                students[index] = updatedStudent; // Update the student data in the list.
+                fileHandler.Write(students); // Write all students to the file.
+                MessageBox.Show("Student information updated successfully.", "Update Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Student not found.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
         public Student SearchId(int Id, List<Student> students)
         {
+            // Iterate through the list of students to find a match for the given Id.
             foreach (Student student in students)
             {
+                // Check if the current student's ID matches the provided Id.
                 if (Id == student.StudentId)
                 {
+                    // If a match is found, return the corresponding student object.
                     return student;
                 }
             }
+            // If no matching student is found, return null.
             return null;
         }
     }

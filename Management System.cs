@@ -31,10 +31,10 @@ namespace PRG282_PRJ
 
         private void LoadData(List<Student> dataList)
         {
-            
-            DataHandler handler = new DataHandler();
-
+            // Set the binding source to the provided student data list.
             bindingSource.DataSource = dataList;
+
+            // Bind the data source to the DataGridView for display.
             dgvStudents.DataSource = bindingSource;
         }
 
@@ -112,6 +112,7 @@ namespace PRG282_PRJ
             txtFirstName.Clear();
             txtLastName.Clear();
             txtAge.Clear();
+            cmbCourses.SelectedIndex = -1;
 
             // Refresh the dataGridView
             bindingSource.DataSource = Program.fileHandler.Read();
@@ -148,12 +149,6 @@ namespace PRG282_PRJ
             }
         }
 
-
-        private void lblSearchId_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void btnClearSearch_Click(object sender, EventArgs e)
         {
             // Reset the Search result and text box.
@@ -180,6 +175,34 @@ namespace PRG282_PRJ
             {
                 // Prevents the selection of the head row. Selecting it, throws an exception that will be caught here, and ignored as it doesn't affect the program execution.
             }
+        }
+
+        private void btnUpdateStudent_Click(object sender, EventArgs e)
+        {
+            int studentId;
+            int age;
+
+            // Ensure ID and Age fields are valid integers.
+            if (!int.TryParse(txtStudentID.Text, out studentId) || !int.TryParse(txtAge.Text, out age))
+            {
+                MessageBox.Show("Please enter valid ID and Age values.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            // Collect updated data for the selected student.
+            string firstName = txtFirstName.Text;
+            string lastName = txtLastName.Text;
+            string course = cmbCourses.SelectedItem?.ToString() ?? string.Empty; // Get selected course.
+
+            // Create the updated Student object.
+            Student updatedStudent = new Student(studentId, firstName, lastName, age, course);
+
+            // Update the student record.
+            dataHandler.UpdateStudent(updatedStudent);
+            LoadStudents(); // Refresh the DataGridView to show updated data.
+
+            // Clear input fields after updating.
+            ClearInputFields();
         }
 
         private void ClearInputFields()
