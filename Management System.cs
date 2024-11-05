@@ -22,7 +22,8 @@ namespace PRG282_PRJ
 
         BindingSource bindingSource = new BindingSource();
 
-        private void RenameHeaders()
+
+        private void RenameHeaders() // Rename all the headers properly
         {
             dgvStudents.Columns[0].HeaderText = "Student ID";
             dgvStudents.Columns[1].HeaderText = "First Name";
@@ -36,6 +37,9 @@ namespace PRG282_PRJ
 
             // Bind the data source to the DataGridView for display.
             dgvStudents.DataSource = bindingSource;
+
+            // Update the summary display after loading the data.
+            DisplaySummary();
         }
 
         private void LoadStudents()
@@ -43,6 +47,7 @@ namespace PRG282_PRJ
             dgvStudents.DataSource = null;
             dgvStudents.DataSource = dataHandler.GetStudents(); // Reload the students list into the DataGridView.
         }
+
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -54,7 +59,16 @@ namespace PRG282_PRJ
             cmbCourses.Items.AddRange(Program.fileHandler.ReadCourses().ToArray());
 
             dgvStudents.Columns[4].Width = 155;
+
         }
+
+        private void DisplaySummary()
+        {
+            // Update the label to display the generated summary.
+            lblSummary.Text = Program.fileHandler.GenerateSummary(Program.dataHandler.CalculateSummary(Program.fileHandler.Read()));
+        }
+
+
 
         private void btnAddStudent_Click(object sender, EventArgs e)
         {
@@ -114,8 +128,11 @@ namespace PRG282_PRJ
             txtAge.Clear();
             cmbCourses.SelectedIndex = -1;
 
-            // Refresh the dataGridView
+            // Refresh the dataGridView and Summary Label
             bindingSource.DataSource = Program.fileHandler.Read();
+
+            // Update the summary text label
+            DisplaySummary();
         }
 
         private void btnSearch_Click(object sender, EventArgs e)

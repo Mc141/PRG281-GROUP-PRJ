@@ -30,7 +30,6 @@
         {
             this.dgvStudents = new System.Windows.Forms.DataGridView();
             this.btnAddStudent = new System.Windows.Forms.Button();
-            this.btnGenerateSummary = new System.Windows.Forms.Button();
             this.btn = new System.Windows.Forms.Button();
             this.btnUpdateStudent = new System.Windows.Forms.Button();
             this.lblStudentId = new System.Windows.Forms.Label();
@@ -47,6 +46,7 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.cmbCourses = new System.Windows.Forms.ComboBox();
             this.btnClearSearch = new System.Windows.Forms.Button();
+            this.lblSummary = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
             this.SuspendLayout();
             // 
@@ -75,16 +75,6 @@
             this.btnAddStudent.Text = "Add Student";
             this.btnAddStudent.UseVisualStyleBackColor = true;
             this.btnAddStudent.Click += new System.EventHandler(this.btnAddStudent_Click);
-            // 
-            // btnGenerateSummary
-            // 
-            this.btnGenerateSummary.Location = new System.Drawing.Point(837, 355);
-            this.btnGenerateSummary.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.btnGenerateSummary.Name = "btnGenerateSummary";
-            this.btnGenerateSummary.Size = new System.Drawing.Size(123, 27);
-            this.btnGenerateSummary.TabIndex = 6;
-            this.btnGenerateSummary.Text = "Generate Summary";
-            this.btnGenerateSummary.UseVisualStyleBackColor = true;
             // 
             // btn
             // 
@@ -240,12 +230,24 @@
             this.btnClearSearch.UseVisualStyleBackColor = true;
             this.btnClearSearch.Click += new System.EventHandler(this.btnClearSearch_Click);
             // 
+            // lblSummary
+            // 
+            this.lblSummary.AutoSize = true;
+            this.lblSummary.ForeColor = System.Drawing.SystemColors.HighlightText;
+            this.lblSummary.Location = new System.Drawing.Point(810, 355);
+            this.lblSummary.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblSummary.Name = "lblSummary";
+            this.lblSummary.Size = new System.Drawing.Size(60, 15);
+            this.lblSummary.TabIndex = 23;
+            this.lblSummary.Text = "Summary";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(980, 402);
+            this.Controls.Add(this.lblSummary);
             this.Controls.Add(this.btnClearSearch);
             this.Controls.Add(this.cmbCourses);
             this.Controls.Add(this.btnSearch);
@@ -261,7 +263,6 @@
             this.Controls.Add(this.lblFirstName);
             this.Controls.Add(this.btnUpdateStudent);
             this.Controls.Add(this.btn);
-            this.Controls.Add(this.btnGenerateSummary);
             this.Controls.Add(this.btnAddStudent);
             this.Controls.Add(this.lblStudentId);
             this.Controls.Add(this.dgvStudents);
@@ -281,7 +282,6 @@
 
         private System.Windows.Forms.DataGridView dgvStudents;
         private System.Windows.Forms.Button btnAddStudent;
-        private System.Windows.Forms.Button btnGenerateSummary;
         private System.Windows.Forms.Button btn;
         private System.Windows.Forms.Button btnUpdateStudent;
         private System.Windows.Forms.Label lblStudentId;
@@ -298,6 +298,7 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.ComboBox cmbCourses;
         private System.Windows.Forms.Button btnClearSearch;
+        private System.Windows.Forms.Label lblSummary;
     }
 }
 

@@ -10,21 +10,10 @@ namespace PRG282_PRJ
 {
     internal class FileHandler
     {
-        private readonly string filePath = @"students.txt"; // Path of the file where student records will be stored.
-        private readonly string coursesFilePath = @"courses.txt";
+        public readonly string filePath = @"students.txt"; // Path of the file where student records will be stored.
+        public readonly string coursesFilePath = @"courses.txt";
+        public readonly string summaryFilePath = @"summary.txt";
 
-
-        public bool FileExists()
-        {
-            if (File.Exists(filePath))
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
 
         // Writes the details from the list of students to the specified file in comma-separated format.
         public void Write(List<Student> students)
@@ -134,13 +123,38 @@ namespace PRG282_PRJ
             }
         }
 
-        public List<string> ReadCourses()
+
+        public List<string> ReadCourses() // Read courses from the courses text file that will be used for the comboBox population.
         {
             List<string> courses = File.ReadAllLines(coursesFilePath).ToList();
             return courses;
         }
 
-        // Private helper method to handle exceptions and display appropriate messages.
+
+        // Generate the age and student count summary
+        public string GenerateSummary(string[] summaryData)
+        {
+            // Construct the lines to write to the summary file.
+            string totalStudentLine = $"Number of Students: {summaryData[0]}";
+            string averageAgeLine = $"Average Student Age: {summaryData[1]}";
+
+            try
+            {
+                // Write the summary data to the specified file path.
+                File.WriteAllLines(summaryFilePath, new string[] { totalStudentLine, averageAgeLine });
+            }
+            catch (Exception ex) // Catch any exceptions that occur during file operations.
+            {
+                // Handle the exception using the private helper method.
+                HandleException(ex);
+            }
+
+            return $"{totalStudentLine}{Environment.NewLine}{averageAgeLine}";
+        }
+
+
+
+
         private void HandleException(Exception ex)
         {
             // Determine the type of exception and show a relevant message.
@@ -152,7 +166,7 @@ namespace PRG282_PRJ
             {
                 MessageBox.Show("Access to the file is denied: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            else if (ex is IOException)// Handles errors that occur during file write,read or append operations.
+            else if (ex is IOException) // Handles errors that occur during file write, read, or append operations.
             {
                 MessageBox.Show("An I/O error occurred: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

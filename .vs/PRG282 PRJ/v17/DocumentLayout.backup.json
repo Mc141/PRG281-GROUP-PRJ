@@ -1,25 +1,25 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\",
+  "WorkspaceRootPath": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\management system.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|solutionrelative:management system.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\filehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|solutionrelative:filehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|c:\\users\\mc\\desktop\\code\\c#\\prg281-group-prj\\prg281-group-prj\\datahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|solutionrelative:datahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|c:\\users\\mc\\desktop\\code\\c#\\prg281-group-prj\\prg281-group-prj\\management system.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|c:\\users\\mc\\desktop\\code\\c#\\prg281-group-prj\\management system.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|solutionrelative:management system.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\management system.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|solutionrelative:management system.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\filehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|solutionrelative:filehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\datahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|solutionrelative:datahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{71677461-6D61-49D9-B5BA-5F5B24DB28AD}|PRG282 PRJ.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -30,7 +30,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 5,
           "Children": [
             {
               "$type": "Bookmark",
@@ -40,61 +40,58 @@
               "$type": "Document",
               "DocumentIndex": 4,
               "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\Program.cs",
+              "DocumentMoniker": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\Program.cs",
+              "ToolTip": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\Program.cs",
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T22:31:33.386Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-02T22:31:33.386Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "DataHandler.cs",
+              "DocumentMoniker": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\DataHandler.cs",
+              "RelativeDocumentMoniker": "DataHandler.cs",
+              "ToolTip": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\DataHandler.cs",
+              "RelativeToolTip": "DataHandler.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAWwCgAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-11-03T01:08:51.823Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "DataHandler.cs",
-              "DocumentMoniker": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\DataHandler.cs",
-              "RelativeDocumentMoniker": "DataHandler.cs",
-              "ToolTip": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\DataHandler.cs",
-              "RelativeToolTip": "DataHandler.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAWwCgAAAANAAAAAAAAAA==",
+              "Title": "FileHandler.cs",
+              "DocumentMoniker": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\FileHandler.cs",
+              "RelativeDocumentMoniker": "FileHandler.cs",
+              "ToolTip": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\FileHandler.cs",
+              "RelativeToolTip": "FileHandler.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAUwHwAAABjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-03T01:08:51.823Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-11-02T22:31:31.408Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "FileHandler.cs",
-              "DocumentMoniker": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\FileHandler.cs",
-              "RelativeDocumentMoniker": "FileHandler.cs",
-              "ToolTip": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\FileHandler.cs",
-              "RelativeToolTip": "FileHandler.cs",
-              "ViewState": "AgIAADIAAAAAAAAAAAAUwHwAAABjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-02T22:31:31.408Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
               "Title": "Management System.cs",
-              "DocumentMoniker": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\Management System.cs",
+              "DocumentMoniker": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\Management System.cs",
               "RelativeDocumentMoniker": "Management System.cs",
-              "ToolTip": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\Management System.cs",
+              "ToolTip": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\Management System.cs",
               "RelativeToolTip": "Management System.cs",
-              "ViewState": "AgIAAGIAAAAAAAAAAADwv24AAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAFYAAAAAAAAAAADwv24AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-02T22:34:24.349Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 0,
               "Title": "Management System.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\Management System.cs",
+              "DocumentMoniker": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\Management System.cs",
               "RelativeDocumentMoniker": "Management System.cs",
-              "ToolTip": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\PRG281-GROUP-PRJ\\Management System.cs [Design]",
+              "ToolTip": "C:\\Users\\MC\\Desktop\\Code\\C#\\PRG281-GROUP-PRJ\\Management System.cs [Design]",
               "RelativeToolTip": "Management System.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-02T22:30:12.785Z",

@@ -37,7 +37,7 @@ namespace PRG282_PRJ
 
             students.Add(newStudent); // Add the new student to the list.
 
-            if (fileHandler.FileExists() == true)
+            if (File.Exists(Program.fileHandler.filePath))
             {
                 List<Student> newStudents = new List<Student>(); // Initialize a new list for the new student to append.
                 newStudents.Add(newStudent); // Add the newStudent to the newStudents list.
@@ -46,22 +46,6 @@ namespace PRG282_PRJ
             else
             {
                 fileHandler.Write(students); //If the file doesn't exist, write all students to the file.
-            }
-        }
-
-        public void DeleteStudent(int studentId)
-        {
-            // Remove the student with the matching ID from the list.
-            Student studentToDelete = students.Find(s => s.StudentId == studentId);
-            if (studentToDelete != null)
-            {
-                students.Remove(studentToDelete); // Remove the student from the list.
-                fileHandler.Write(students); // Write the updated list to the file.
-                MessageBox.Show("Student deleted successfully.", "Delete Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-            else
-            {
-                MessageBox.Show("Student not found.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -95,6 +79,46 @@ namespace PRG282_PRJ
             }
             // If no matching student is found, return null.
             return null;
+        }
+
+        public void DeleteStudent(int studentId)
+        {
+            // Remove the student with the matching ID from the list.
+            Student studentToDelete = students.Find(s => s.StudentId == studentId);
+            if (studentToDelete != null)
+            {
+                students.Remove(studentToDelete); // Remove the student from the list.
+                fileHandler.Write(students); // Write the updated list to the file.
+                MessageBox.Show("Student deleted successfully.", "Delete Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                MessageBox.Show("Student not found.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+
+
+        public string[] CalculateSummary(List<Student> students)
+        {
+            // Variable to hold the total age of all students.
+            int totalAge = 0;
+            double averageAge;
+            // Get the total number of students.
+            int totalStudents = students.Count;
+
+            // Iterate over each student to accumulate their ages.
+            foreach (Student student in students)
+            {
+                totalAge += student.Age; // Add each student's age to totalAge.
+            }
+
+            // Calculate the average age; cast to double for accurate division.
+            // Round the result to 2 decimal places for better readability.
+            averageAge = Math.Round(((double)totalAge / totalStudents), 2);
+
+            // Return an array containing the total number of students and the average age.
+            return new string[] { totalStudents.ToString(), averageAge.ToString() };
         }
     }
 }
