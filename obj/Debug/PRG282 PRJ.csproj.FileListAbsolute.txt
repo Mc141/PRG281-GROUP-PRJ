@@ -60,3 +60,14 @@ C:\Users\MC\Desktop\Code\C#\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.csproj.Generat
 C:\Users\MC\Desktop\Code\C#\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.csproj.CoreCompileInputs.cache
 C:\Users\MC\Desktop\Code\C#\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.exe
 C:\Users\MC\Desktop\Code\C#\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.pdb
+C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\bin\Debug\PRG282 PRJ.exe.config
+C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\bin\Debug\PRG282 PRJ.exe
+C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\bin\Debug\PRG282 PRJ.pdb
+C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.csproj.AssemblyReference.cache
+C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.csproj.SuggestedBindingRedirects.cache
+C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\obj\Debug\PRG282_PRJ.Form1.resources
+C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\obj\Debug\PRG282_PRJ.Properties.Resources.resources
+C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.csproj.GenerateResource.cache
+C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.csproj.CoreCompileInputs.cache
+C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.exe
+C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.pdb

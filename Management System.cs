@@ -13,145 +13,117 @@ namespace PRG282_PRJ
 {
     public partial class Form1 : Form
     {
-        private DataHandler dataHandler;
+        static DataHandler dataHandler = Program.dataHandler;
+        static FileHandler fileHandler = Program.fileHandler;
+
         public Form1()
         {
             InitializeComponent();
-            dataHandler = new DataHandler();
         }
 
+        // binding source for the DataGridView as a source
         BindingSource bindingSource = new BindingSource();
-
-
-        private void RenameHeaders() // Rename all the headers properly
-        {
-            dgvStudents.Columns[0].HeaderText = "Student ID";
-            dgvStudents.Columns[1].HeaderText = "First Name";
-            dgvStudents.Columns[2].HeaderText = "Last Name";
-        }
-
-        private void LoadData(List<Student> dataList)
-        {
-            // Set the binding source to the provided student data list.
-            bindingSource.DataSource = dataList;
-
-            // Bind the data source to the DataGridView for display.
-            dgvStudents.DataSource = bindingSource;
-
-            // Update the summary display after loading the data.
-            DisplaySummary();
-        }
-
-        private void LoadStudents()
-        {
-            dgvStudents.DataSource = null;
-            dgvStudents.DataSource = dataHandler.GetStudents(); // Reload the students list into the DataGridView.
-        }
 
 
         private void Form1_Load(object sender, EventArgs e)
         {
             // Populate DGV and renames headers.
-            LoadData(Program.dataHandler.GetStudents());
+            dataHandler.students = fileHandler.Read(); // Load existing students from the file.
+            RefreshData(dataHandler.students);
             RenameHeaders();
 
             // Populate course comboBox
-            cmbCourses.Items.AddRange(Program.fileHandler.ReadCourses().ToArray());
+            cmbCourses.Items.AddRange(fileHandler.ReadCourses().ToArray());
 
-            dgvStudents.Columns[4].Width = 155;
-
+            dgvStudents.Columns[4].Width = 155; // Set column width to make enough space to display courses in full.
         }
 
-        private void DisplaySummary()
+
+        private void dgvStudents_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            // Update the label to display the generated summary.
-            lblSummary.Text = Program.fileHandler.GenerateSummary(Program.dataHandler.CalculateSummary(Program.fileHandler.Read()));
+            int indexRow = e.RowIndex; //Catch seleted row index
+
+            try
+            {
+                PopulateInputs(indexRow); //Populat the input fields based on the selected record
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                // Prevents the selection of the head row. Selecting it, throws an exception that will be caught here, and ignored as it doesn't affect the program execution.
+            }
         }
-
-
 
         private void btnAddStudent_Click(object sender, EventArgs e)
         {
-            // Validate input fields
-            if (string.IsNullOrWhiteSpace(txtStudentID.Text) ||
-                string.IsNullOrWhiteSpace(txtFirstName.Text) ||
-                string.IsNullOrWhiteSpace(txtLastName.Text) ||
-                string.IsNullOrWhiteSpace(txtAge.Text) ||
-                string.IsNullOrWhiteSpace(cmbCourses.Text))
+            string newStudentId;
+            // If the file is empty generate a predefined id for the first student, else auto  generate a new id based on the last entered record.
+            if (fileHandler.IsFileEmpty(fileHandler.studentsFilePath))
             {
-                MessageBox.Show("Please fill in all fields.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Exit the method if validation fails
+                newStudentId = "0";
+            }
+            else
+            {
+                newStudentId = (dataHandler.students[dataHandler.students.Count - 1].StudentId + 1).ToString();
             }
 
-            // Parse the Student ID and Age to integers
-            if (!int.TryParse(txtStudentID.Text, out int studentId) || !int.TryParse(txtAge.Text, out int age) ||
-                age < 18 || age > 90)
+            // Validate inputs and exit if any validation fails
+            if (!dataHandler.ValidInputs(newStudentId, txtFirstName.Text, txtLastName.Text, txtAge.Text, cmbCourses.Text, out int studentId, out int age))
             {
-                MessageBox.Show("Student ID and Age must be valid integers. Age must be between 18 and 90.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return; // Exit the method if parsing fails
+                return; // Exit if inputs are not valid
             }
 
-            // Validate that FirstName and LastName are only text
-            Regex textOnlyPattern = new Regex("^[a-zA-Z]+$");
-            if (!textOnlyPattern.IsMatch(txtFirstName.Text))
+            // Collect and format student data after the validation
+            Student newStudent = dataHandler.CollectAndFormatStudentData(newStudentId, txtFirstName.Text, txtLastName.Text, txtAge.Text, cmbCourses.Text, out studentId, out age);
+
+            // Show a confirmation dialog before adding the new student
+            if (!ShowConfirmationDialog("add", studentId, newStudent.FirstName, newStudent.LastName, age, cmbCourses.Text))
             {
-                MessageBox.Show("First name must contain only letters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+                return; // Exit if the user does not confirm
             }
 
-            if (!textOnlyPattern.IsMatch(txtLastName.Text))
-            {
-                MessageBox.Show("Last name must contain only letters.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            // If confirmed, call the AddStudent method to add the new student
+            bool success = dataHandler.AddStudent(fileHandler, newStudent);
 
-            // Format FirstName and LastName: make lowercase and capitalize the first letter
-            string formattedFirstName = char.ToUpper(txtFirstName.Text.ToLower()[0]) + txtFirstName.Text.ToLower().Substring(1);
-            string formattedLastName = char.ToUpper(txtLastName.Text.ToLower()[0]) + txtLastName.Text.ToLower().Substring(1);
-
-            // Create a new Student object with the formatted input values
-            Student newStudent = new Student(studentId, formattedFirstName, formattedLastName, age, cmbCourses.Text);
-
-            // Create an instance of DataHandler
-            DataHandler handler = new DataHandler();
-
-            // Call the AddStudent method to add the new student
-            handler.AddStudent(newStudent);
-
-            // Refresh the data in the DataGridView to show the new student
-            Program.dataHandler.GetStudents();
+            // Refresh the data in the DataGridView to show the new student as well
+            RefreshData(dataHandler.students);
 
             // Clear input fields after adding
-            txtStudentID.Clear();
-            txtFirstName.Clear();
-            txtLastName.Clear();
-            txtAge.Clear();
-            cmbCourses.SelectedIndex = -1;
+            ClearInputFields();
 
-            // Refresh the dataGridView and Summary Label
-            bindingSource.DataSource = Program.fileHandler.Read();
+            // Reset the Search result and text box.
+            ClearSearch();
 
-            // Update the summary text label
-            DisplaySummary();
+            // If the adding was successful, show a message box indicating success.
+            if (success)
+            {
+                MessageBox.Show("Student record added successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
+
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            // Declare a variable to store the search ID.
-            int searchId;
-
-            // Try to parse the input text from txtIdSearch as an integer.
-            if (int.TryParse(txtIdSearch.Text, out searchId))
+            // Try to parse the input text from txtIdSearch as an integer, and continue with the search if success.
+            if (int.TryParse(txtIdSearch.Text, out int searchId))
             {
                 // Search for the student with the given ID in the list of students.
-                Student searchedStudent = Program.dataHandler.SearchId(searchId, Program.dataHandler.GetStudents());
+                Student searchedStudent = dataHandler.SearchId(searchId, dataHandler.students);
 
                 // Check if the student was found.
                 if (searchedStudent != null)
                 {
                     // If found, create a list with the searched student (to display the result) and load the data.
-                    List<Student> results = new List<Student> { searchedStudent };
-                    LoadData(results); // Load the search results into the DataGridView.
+                    List<Student> results = new List<Student> { searchedStudent }; // RefreshData method requires a list as an input.
+                    RefreshData(results); // Load the search results into the DataGridView.
+
+                    // To allow for immediate editing, select the first row in the DataGridView and pre-fill the input fields
+                    if (dgvStudents.Rows.Count > 0)
+                    {
+                        dgvStudents.Rows[0].Selected = true; // Select the first row (aka the only row)
+
+                        // Pre-fill input fields with the student's data
+                        PopulateInputs(0);
+                    }
                 }
                 else
                 {
@@ -166,64 +138,137 @@ namespace PRG282_PRJ
             }
         }
 
+
         private void btnClearSearch_Click(object sender, EventArgs e)
         {
             // Reset the Search result and text box.
-            LoadData(Program.dataHandler.GetStudents());
-            txtIdSearch.Text = "";
+            ClearSearch();
         }
 
-        private void dgvStudents_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int indexRow = e.RowIndex; //Catch seleted row index
-
-            try
-            {
-                // Write the selected row's values to the corresponding text boxes.
-                DataGridViewRow row = dgvStudents.Rows[indexRow];
-
-                txtStudentID.Text = row.Cells[0].Value.ToString();
-                txtFirstName.Text = row.Cells[1].Value.ToString();
-                txtLastName.Text = row.Cells[2].Value.ToString();
-                txtAge.Text = row.Cells[3].Value.ToString();
-                cmbCourses.Text = row.Cells[4].Value.ToString();
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                // Prevents the selection of the head row. Selecting it, throws an exception that will be caught here, and ignored as it doesn't affect the program execution.
-            }
-        }
 
         private void btnUpdateStudent_Click(object sender, EventArgs e)
         {
-            int studentId;
-            int age;
-
-            // Ensure ID and Age fields are valid integers.
-            if (!int.TryParse(txtStudentID.Text, out studentId) || !int.TryParse(txtAge.Text, out age))
+            // Validate field inputs and exit if any validation fails
+            if (!dataHandler.ValidInputs(txtStudentID.Text, txtFirstName.Text, txtLastName.Text, txtAge.Text, cmbCourses.Text, out int studentId, out int age))
             {
-                MessageBox.Show("Please enter valid ID and Age values.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return; // Exit if inputs are not valid
+            }
+
+            // Collect and format student data after successful validations
+            Student updatedStudent = dataHandler.CollectAndFormatStudentData(txtStudentID.Text, txtFirstName.Text, txtLastName.Text, txtAge.Text, cmbCourses.Text, out studentId, out age);
+
+            // Show a confirmation dialog before updating
+            if (!ShowConfirmationDialog("update", studentId, updatedStudent.FirstName, updatedStudent.LastName, age, cmbCourses.Text))
+            {
+                return; // Exit if the user does not confirm the operation
+            }
+
+            // When confirmed, update the student record.
+            dataHandler.UpdateStudent(fileHandler, updatedStudent);
+
+            // Refresh the data in the DataGridView
+            RefreshData(dataHandler.students);
+
+            // Clear input fields after updating
+            ClearInputFields();
+            // Reset the Search result and text box.
+            ClearSearch();
+
+            // Show success message if update was successful.
+            MessageBox.Show("Student information updated successfully.", "Update Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            // Validate that the ID field contains a valid integer, ensuring that a student has been selected.
+            if (!int.TryParse(txtStudentID.Text, out int studentId))
+            {
+                //if a student was not selected, inform the user to select a student.
+                MessageBox.Show("Please click on a student to delete.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Collect updated data for the selected student.
-            string firstName = txtFirstName.Text;
-            string lastName = txtLastName.Text;
-            string course = cmbCourses.SelectedItem?.ToString() ?? string.Empty; // Get selected course.
+            // Find the student details to display in the confirmation dialog before deleting
+            Student studentToDelete = dataHandler.students.Find(s => s.StudentId == studentId);
+            if (studentToDelete == null)
+            {   // If the chosed student does not exist, stop the operation and inform user.
+                MessageBox.Show("Student not found.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-            // Create the updated Student object.
-            Student updatedStudent = new Student(studentId, firstName, lastName, age, course);
+            // If successful, use the ShowConfirmationDialog method to confirm deletion
+            bool userConfirmed = ShowConfirmationDialog("delete", studentToDelete.StudentId, studentToDelete.FirstName, studentToDelete.LastName, studentToDelete.Age, studentToDelete.Course);
 
-            // Update the student record.
-            dataHandler.UpdateStudent(updatedStudent);
-            LoadStudents(); // Refresh the DataGridView to show updated data.
+            if (!userConfirmed)
+            {
+                return; // Exit if the user does not confirm the dialog box
+            }
 
-            // Clear input fields after updating.
+            // If the used confirmed the dialog, delete the student record based on the chosen student ID.
+            dataHandler.DeleteStudent(fileHandler, studentId);
+
+            // Clear input fields after deleting.
             ClearInputFields();
+
+            // Reset the Search result and text box.
+            ClearSearch();
+
+            // Refresh the DataGridView to show updated data
+            RefreshData(dataHandler.students);
         }
+
+
+
+        /// <summary>
+        /// All helper methods used in programming the form components.
+        /// </summary>
+
+        private void RenameHeaders() // Rename the headers with appropiate titles
+        {
+            dgvStudents.Columns[0].HeaderText = "Student ID";
+            dgvStudents.Columns[1].HeaderText = "First Name";
+            dgvStudents.Columns[2].HeaderText = "Last Name";
+        }
+
+        private void ClearSearch()
+        {
+            // Reset the Search result and text box.
+            RefreshData(dataHandler.students);
+            txtIdSearch.Text = "";
+        }
+
+
+        private void RefreshData(List<Student> dataList)
+        {
+            // Set the binding source to the provided student data list.
+            bindingSource.DataSource = dataList;
+
+            // Bind the data source to the DataGridView for display.
+            dgvStudents.DataSource = bindingSource;
+            dataHandler.students = fileHandler.Read();
+
+            // Update the summary display after loading the data.
+            DisplaySummary();
+        }
+
+
+        private void PopulateInputs(int selectedIndexRow)
+        {
+            // Write the selected row's values to the corresponding text boxes.
+            DataGridViewRow row = dgvStudents.Rows[selectedIndexRow];
+
+            txtStudentID.Text = row.Cells[0].Value.ToString();
+            txtFirstName.Text = row.Cells[1].Value.ToString();
+            txtLastName.Text = row.Cells[2].Value.ToString();
+            txtAge.Text = row.Cells[3].Value.ToString();
+            cmbCourses.Text = row.Cells[4].Value.ToString();
+        }
+
 
         private void ClearInputFields()
         {
+
             txtStudentID.Clear();
             txtFirstName.Clear();
             txtLastName.Clear();
@@ -231,23 +276,35 @@ namespace PRG282_PRJ
             cmbCourses.SelectedIndex = -1; // Reset combo box selection.
         }
 
-        private void btn_Click(object sender, EventArgs e)
+
+        private void DisplaySummary()
         {
-            int studentId;
-
-            // Ensure that the ID field contains a valid integer.
-            if (!int.TryParse(txtStudentID.Text, out studentId))
+            // if the students file is empty, don't display a summary, as it's not possible.
+            if (fileHandler.IsFileEmpty(fileHandler.studentsFilePath))
             {
-                MessageBox.Show("Please enter a valid ID value.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                lblSummary.Text = $"";
             }
-
-            // Delete the student record.
-            dataHandler.DeleteStudent(studentId);
-            LoadStudents(); // Refresh the DataGridView to show updated data.
-
-            // Clear input fields after deleting.
-            ClearInputFields();
+            else
+            {
+                // Update the label to display the generated summary.
+                lblSummary.Text = Program.fileHandler.GenerateSummary(Program.dataHandler.CalculateSummary(Program.fileHandler.Read()));
+            }
         }
+
+
+        // Method to show a confirmation dialog with student details when adding/updating/deleting a student.
+        private bool ShowConfirmationDialog(string action, int studentId, string firstName, string lastName, int age, string course)
+        {
+            string message = $"Are you sure you want to {action} the following student record?\n\n" +
+                             $"ID: {studentId}\n" +
+                             $"First Name: {firstName}\n" +
+                             $"Last Name: {lastName}\n" +
+                             $"Age: {age}\n" +
+                             $"Course: {course}";
+
+            DialogResult result = MessageBox.Show(message, $"Confirm {action}", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            return result == DialogResult.Yes;
+        }
+
     }
 }
