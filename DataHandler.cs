@@ -6,12 +6,17 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace PRG282_PRJ
 {
     internal class DataHandler
     {
         public List<Student> students; // List to store the student records.
+        Logger logger = new Logger();
+        string logResult; // Variable to hold the result of the transaction.
+        string details; // Variable to hold the details of the transaction.
+        string action; // Variable to hold the type of transaction.
 
         public bool AddStudent(FileHandler fileHandler, Student newStudent)
         {
@@ -20,6 +25,7 @@ namespace PRG282_PRJ
             {
                 // Display an error message to the user if a duplicate student ID is found.
                 MessageBox.Show("A student with this ID already exists.", "Duplicate ID", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                logResult = "Failed: A student with this ID already exists"; // Log the result as failed if a student with a duplicate Id exists.
                 return false; //Exit out of the method
             }
 
@@ -29,54 +35,117 @@ namespace PRG282_PRJ
             if (File.Exists(fileHandler.studentsFilePath) == true)
             {
                 fileHandler.Append(newStudent); //Append the student to the file.
+                logResult = "Student added successfully"; // Log that the result of the transaction was successful.
             }
             else
             {
                 // Handle the scenario where the file does not exist.
                 MessageBox.Show("The student records file does not exist!", "File Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                logResult = "Failed: The student records file does not exist"; // Log the result of the transaction is failed, because there is no students file.
                 fileHandler.Write(students); //If the file doesn't exist, create and write all students to the students file.
             }
+
+            // Get student details for logging the transaction.
+            details = BuildAddDetails(newStudent);
+
+            //Get the action for logging the transaction.
+            action = "Attempt to Add a new Student";
+
+            // Log the addition.
+            logger.LogTransaction(action, details, logResult);
+
             return true;
-        }
-
-
-        // Check for duplicate students based on StudentId
-        private bool IsDuplicateStudent(Student student)
-        {
-            return students.Exists(s => s.StudentId == student.StudentId);
         }
 
 
         public void DeleteStudent(FileHandler fileHandler, int studentId)
         {
+            action = "Attempt to delete a Student record"; //Get the action for logging the transaction.
+
             // Find and remove the student with the matching ID from the list
             Student studentToDelete = students.Find(s => s.StudentId == studentId);
+
+            // Get student details for logging the transaction.
+            details = BuildDeleteDetails(studentToDelete);
+
             if (studentToDelete != null)
             {
                 students.Remove(studentToDelete); // Remove the student from the list
                 fileHandler.Write(students); // Write the updated list wihtout the deleted student to the student file
                 MessageBox.Show("Student deleted successfully.", "Delete Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                logResult = "Student deleted successfully"; // Log that the result of the transaction was successful.
             }
             else
             {
                 MessageBox.Show("Student not found.", "Delete Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                logResult = "Failed: Student not found"; // Log that the result of the transaction was failure, because the student was not found.
             }
+
+            // Log the addition.
+            logger.LogTransaction(action, details, logResult);
         }
 
 
         public void UpdateStudent(FileHandler fileHandler, Student updatedStudent)
         {
+            action = "Attempt to update Student details"; //Get the action for logging the transaction.
+
             // Find the index of the student with the matching ID.
             int index = students.FindIndex(s => s.StudentId == updatedStudent.StudentId);
+
+            Student originalStudent = students[index]; // Get the original student data before updating.
+
+            details = BuildUpdateDetails(originalStudent, updatedStudent);
+
             if (index >= 0)
             {
                 students[index] = updatedStudent; // Update the student data in the list.
-                fileHandler.Write(students); // Write all students including the updated student to the file.  
+                fileHandler.Write(students); // Write all students including the updated student to the file.
+                logResult = "Student updated successfully";
             }
             else
             {
                 MessageBox.Show("Student not found.", "Update Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                logResult = "Failed: Student not found";
             }
+
+            // Log the addition.
+            logger.LogTransaction(action, details, logResult);
+        }
+
+
+        //Method to generate string for logging details wehn updating or deleteing a student.
+        private string BuildUpdateDetails(Student original, Student updated)
+        {
+            // Initialize with the student ID for context.
+            var changes = new List<string> { $"Student Id = {original.StudentId}" };
+
+            // Add changes if fields differ between original and updated.
+            if (original.FirstName != updated.FirstName) changes.Add($"First Name: {original.FirstName} -> {updated.FirstName}");
+            if (original.LastName != updated.LastName) changes.Add($"Last Name: {original.LastName} -> {updated.LastName}");
+            if (original.Age != updated.Age) changes.Add($"Age: {original.Age} -> {updated.Age}");
+            if (original.Course != updated.Course) changes.Add($"Course: {original.Course} -> {updated.Course}");
+
+            // Return all changes as a comma-separated string.
+            return string.Join(", ", changes);
+        }
+
+
+        private string BuildDeleteDetails(Student student)
+        {
+            return $"Student Id: {student.StudentId}, " +
+                   $"First Name: {student.FirstName}, " +
+                   $"Last Name: {student.LastName}, " +
+                   $"Age: {student.Age}, " +
+                   $"Course: {student.Course}";
+        }
+
+
+        ////Method to generate string for logging details when adding a student.
+        private string BuildAddDetails(Student student)
+        {
+            // Format and return the student's details.
+            return $"Student Id = {student.StudentId}, FirstName: {student.FirstName}, LastName: {student.LastName}, Age: {student.Age}, Course: {student.Course}";
         }
 
 
@@ -94,6 +163,13 @@ namespace PRG282_PRJ
             }
             // If no matching student is found, return null.
             return null;
+        }
+
+
+        // Check for duplicate students based on StudentId
+        private bool IsDuplicateStudent(Student student)
+        {
+            return students.Exists(s => s.StudentId == student.StudentId);
         }
 
 
@@ -183,25 +259,36 @@ namespace PRG282_PRJ
                 return false; // Exit if name validation fails
             }
 
-            // Validate the selected course
-            if (!IsValidCourse(course))
-            {
-                return false; // Exit if course validation fails
-            }
             return true; // All validations passed
-        }
+        } 
 
 
         // Check if the selected course is valid
-        private bool IsValidCourse(string course)
+        public bool IsValidCourse(string course)
         {
-            if (!Program.fileHandler.ReadCourses().Contains(course)) // Looks if the chosen course is not the coures file
+            // Trim the input course to remove any leading or trailing whitespace
+            course = course.Trim();
+
+            // Check if the course name is empty
+            if (string.IsNullOrEmpty(course))
             {
-                MessageBox.Show("The chosen course does not exist.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false; //return false if the course does not exist.
+                MessageBox.Show("Course name cannot be empty. Please enter a valid course name.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false; // Return false if the course is empty
             }
-            return true; // return true if the selected course is in the course file.
+
+            // Check if the course already exists in the courses file
+            if (Program.fileHandler.ReadCourses().Contains(course)) // Looks if the chosen course already exists in the course file
+            {
+                MessageBox.Show("The course already exists. Please enter a new course name.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false; // Return false if the course already exists
+            }
+
+            // If the course is valid (non-empty and does not exist in the file), return true
+            return true;
         }
+
+
+
 
 
         // Check if the input contains only letters

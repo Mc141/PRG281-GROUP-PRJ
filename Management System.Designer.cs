@@ -47,6 +47,7 @@
             this.cmbCourses = new System.Windows.Forms.ComboBox();
             this.btnClearSearch = new System.Windows.Forms.Button();
             this.lblSummary = new System.Windows.Forms.Label();
+            this.btnAddCourse = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStudents)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,6 +64,7 @@
             this.dgvStudents.ReadOnly = true;
             this.dgvStudents.RowHeadersWidth = 51;
             this.dgvStudents.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.dgvStudents.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvStudents.Size = new System.Drawing.Size(625, 299);
             this.dgvStudents.TabIndex = 0;
             this.dgvStudents.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvStudents_CellClick);
@@ -107,7 +109,7 @@
             this.lblStudentId.Location = new System.Drawing.Point(29, 48);
             this.lblStudentId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblStudentId.Name = "lblStudentId";
-            this.lblStudentId.Size = new System.Drawing.Size(76, 18);
+            this.lblStudentId.Size = new System.Drawing.Size(64, 15);
             this.lblStudentId.TabIndex = 1;
             this.lblStudentId.Text = "Student ID";
             // 
@@ -118,7 +120,7 @@
             this.lblFirstName.Location = new System.Drawing.Point(25, 86);
             this.lblFirstName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(81, 18);
+            this.lblFirstName.Size = new System.Drawing.Size(67, 15);
             this.lblFirstName.TabIndex = 9;
             this.lblFirstName.Text = "First Name";
             // 
@@ -129,7 +131,7 @@
             this.lblLastName.Location = new System.Drawing.Point(26, 128);
             this.lblLastName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblLastName.Name = "lblLastName";
-            this.lblLastName.Size = new System.Drawing.Size(80, 18);
+            this.lblLastName.Size = new System.Drawing.Size(67, 15);
             this.lblLastName.TabIndex = 10;
             this.lblLastName.Text = "Last Name";
             // 
@@ -140,7 +142,7 @@
             this.lblAge.Location = new System.Drawing.Point(63, 168);
             this.lblAge.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblAge.Name = "lblAge";
-            this.lblAge.Size = new System.Drawing.Size(33, 18);
+            this.lblAge.Size = new System.Drawing.Size(28, 15);
             this.lblAge.TabIndex = 11;
             this.lblAge.Text = "Age";
             // 
@@ -151,7 +153,7 @@
             this.lblCourse.Location = new System.Drawing.Point(45, 208);
             this.lblCourse.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblCourse.Name = "lblCourse";
-            this.lblCourse.Size = new System.Drawing.Size(57, 18);
+            this.lblCourse.Size = new System.Drawing.Size(46, 15);
             this.lblCourse.TabIndex = 12;
             this.lblCourse.Text = "Course";
             // 
@@ -160,35 +162,35 @@
             this.txtStudentID.Location = new System.Drawing.Point(100, 42);
             this.txtStudentID.Name = "txtStudentID";
             this.txtStudentID.ReadOnly = true;
-            this.txtStudentID.Size = new System.Drawing.Size(120, 24);
+            this.txtStudentID.Size = new System.Drawing.Size(120, 21);
             this.txtStudentID.TabIndex = 13;
             // 
             // txtAge
             // 
             this.txtAge.Location = new System.Drawing.Point(98, 162);
             this.txtAge.Name = "txtAge";
-            this.txtAge.Size = new System.Drawing.Size(121, 24);
+            this.txtAge.Size = new System.Drawing.Size(121, 21);
             this.txtAge.TabIndex = 15;
             // 
             // txtLastName
             // 
             this.txtLastName.Location = new System.Drawing.Point(99, 122);
             this.txtLastName.Name = "txtLastName";
-            this.txtLastName.Size = new System.Drawing.Size(121, 24);
+            this.txtLastName.Size = new System.Drawing.Size(121, 21);
             this.txtLastName.TabIndex = 16;
             // 
             // txtFirstName
             // 
             this.txtFirstName.Location = new System.Drawing.Point(99, 80);
             this.txtFirstName.Name = "txtFirstName";
-            this.txtFirstName.Size = new System.Drawing.Size(120, 24);
+            this.txtFirstName.Size = new System.Drawing.Size(120, 21);
             this.txtFirstName.TabIndex = 17;
             // 
             // txtIdSearch
             // 
             this.txtIdSearch.Location = new System.Drawing.Point(127, 290);
             this.txtIdSearch.Name = "txtIdSearch";
-            this.txtIdSearch.Size = new System.Drawing.Size(120, 24);
+            this.txtIdSearch.Size = new System.Drawing.Size(120, 21);
             this.txtIdSearch.TabIndex = 19;
             // 
             // lblSearchId
@@ -198,7 +200,7 @@
             this.lblSearchId.Location = new System.Drawing.Point(59, 296);
             this.lblSearchId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSearchId.Name = "lblSearchId";
-            this.lblSearchId.Size = new System.Drawing.Size(73, 18);
+            this.lblSearchId.Size = new System.Drawing.Size(61, 15);
             this.lblSearchId.TabIndex = 18;
             this.lblSearchId.Text = "Search ID";
             // 
@@ -219,7 +221,7 @@
             this.cmbCourses.FormattingEnabled = true;
             this.cmbCourses.Location = new System.Drawing.Point(98, 200);
             this.cmbCourses.Name = "cmbCourses";
-            this.cmbCourses.Size = new System.Drawing.Size(173, 26);
+            this.cmbCourses.Size = new System.Drawing.Size(173, 23);
             this.cmbCourses.TabIndex = 21;
             // 
             // btnClearSearch
@@ -240,16 +242,28 @@
             this.lblSummary.Location = new System.Drawing.Point(788, 355);
             this.lblSummary.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblSummary.Name = "lblSummary";
-            this.lblSummary.Size = new System.Drawing.Size(72, 18);
+            this.lblSummary.Size = new System.Drawing.Size(60, 15);
             this.lblSummary.TabIndex = 23;
             this.lblSummary.Text = "Summary";
             // 
+            // btnAddCourse
+            // 
+            this.btnAddCourse.Location = new System.Drawing.Point(98, 229);
+            this.btnAddCourse.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnAddCourse.Name = "btnAddCourse";
+            this.btnAddCourse.Size = new System.Drawing.Size(78, 24);
+            this.btnAddCourse.TabIndex = 24;
+            this.btnAddCourse.Text = "Add Course";
+            this.btnAddCourse.UseVisualStyleBackColor = true;
+            this.btnAddCourse.Click += new System.EventHandler(this.btnAddCourse_Click);
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
             this.ClientSize = new System.Drawing.Size(984, 402);
+            this.Controls.Add(this.btnAddCourse);
             this.Controls.Add(this.lblSummary);
             this.Controls.Add(this.btnClearSearch);
             this.Controls.Add(this.cmbCourses);
@@ -305,6 +319,7 @@
         private System.Windows.Forms.ComboBox cmbCourses;
         private System.Windows.Forms.Button btnClearSearch;
         private System.Windows.Forms.Label lblSummary;
+        private System.Windows.Forms.Button btnAddCourse;
     }
 }
 

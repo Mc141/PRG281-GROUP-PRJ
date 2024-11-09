@@ -160,6 +160,17 @@ namespace PRG282_PRJ
         }
 
 
+        // method for adding a course
+        public void AddCourse(string course)
+        {
+            // Open the file for appending and write the course, ensuring proper disposal of the stream.
+            using (StreamWriter writer = new StreamWriter(coursesFilePath, append: true))
+            {
+                writer.WriteLine(course);
+            }
+        }
+
+
         // Method to read course data from a file and return it as a list of course names.
         public List<string> ReadCourses()
         {

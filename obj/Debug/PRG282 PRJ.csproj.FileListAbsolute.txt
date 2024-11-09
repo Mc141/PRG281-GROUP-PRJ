@@ -71,3 +71,4 @@ C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.csproj.Gener
 C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.csproj.CoreCompileInputs.cache
 C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.exe
 C:\PRG 282 Local\TheDebugRepo\PRG281-GROUP-PRJ\obj\Debug\PRG282 PRJ.pdb
+C:\Users\Latitude 5580\Desktop\Belgium\Second Year\PRG282\Project\PRG281-GROUP-PRJ\obj\Debug\PRG282_PRJ.AddCourse.resources

@@ -15,6 +15,7 @@ namespace PRG282_PRJ
     {
         static DataHandler dataHandler = Program.dataHandler;
         static FileHandler fileHandler = Program.fileHandler;
+        AddCourse addCourseForm;
 
         public Form1()
         {
@@ -23,7 +24,6 @@ namespace PRG282_PRJ
 
         // binding source for the DataGridView as a source
         BindingSource bindingSource = new BindingSource();
-
 
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -219,6 +219,15 @@ namespace PRG282_PRJ
         }
 
 
+        private void btnAddCourse_Click(object  ender, EventArgs e)
+        {
+            addCourseForm = new AddCourse();
+
+            addCourseForm.UpdateCoursesEvent += UpdateCourseComboBox; // Subscribe a method (updates the course comboBox) to an event that triggers when a new course is added.
+
+            addCourseForm.ShowDialog(); // Opens the AddCourse form as a modal dialog to add a new course
+        }
+
 
         /// <summary>
         /// All helper methods used in programming the form components.
@@ -230,6 +239,15 @@ namespace PRG282_PRJ
             dgvStudents.Columns[1].HeaderText = "First Name";
             dgvStudents.Columns[2].HeaderText = "Last Name";
         }
+
+
+        // Method to update ComboBox
+        public void UpdateCourseComboBox()
+        {
+            cmbCourses.Items.Clear();  // Clear existing items before adding new one
+            cmbCourses.Items.AddRange(fileHandler.ReadCourses().ToArray()); // Add new item
+        }
+
 
         private void ClearSearch()
         {
@@ -305,6 +323,5 @@ namespace PRG282_PRJ
             DialogResult result = MessageBox.Show(message, $"Confirm {action}", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             return result == DialogResult.Yes;
         }
-
     }
 }
